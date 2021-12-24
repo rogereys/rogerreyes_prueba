@@ -1,0 +1,73 @@
+<mvc:View
+	controllerName="com.rreyes.prueba_rreyes.controller.Worklist"
+	xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+				<Title
+				text="{i18n>worklistTitle}"
+				level="H1"/>
+				
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<Label class="sapUiTinyMargin" vAlign="Middle" text="Seleccione" />
+			<Select class="sapUiTinyMargin" id="slc-tipoapi" items="{apimodel>/type/}" change="onInfoApi">
+				<core:Item key="{apimodel>key}" text="{apimodel>text}" />
+			</Select>
+		</semantic:headerContent>
+		<semantic:content>
+			<List
+				id="table"
+				width="auto"
+				itemPress="_showObject"
+				items="{
+					path: 'apimodel>/list/'
+				}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title
+						id="tableHeader"
+						text="{worklistView>/worklistTableTitle}"
+						level="H3"/>
+					<ToolbarSpacer />
+					<SearchField
+						id="searchField" class="sapUiTinyMargin"
+						tooltip="{i18n>worklistSearchTooltip}"
+						search=".onSearch">
+						<layoutData>
+							<OverflowToolbarLayoutData
+								maxWidth="200px"
+								priority="NeverOverflow"/>
+						</layoutData>
+					</SearchField>
+					<Label vAlign="Middle" text="Página" />
+					<Select id="slc-numpagina" items="{apimodel>/pag/}" width="5rem" change="onInfoApi">
+						<core:Item key="{apimodel>key}" text="{apimodel>text}" />
+					</Select>
+				</OverflowToolbar>
+			</headerToolbar>
+			<items>
+				<StandardListItem
+					title="{apimodel>name}"
+					description="{= ${apimodel>species} ? ${apimodel>species} : ${apimodel>type} ? ${apimodel>type} : ${apimodel>episode} }"
+					icon="{apimodel>image}"
+					iconDensityAware="false"
+					iconInset="false"
+					type="Navigation">
+				</StandardListItem>
+			</items>
+			</List>
+		</semantic:content>
+
+		<semantic:sendEmailAction/>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

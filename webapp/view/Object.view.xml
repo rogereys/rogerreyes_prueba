@@ -1,0 +1,103 @@
+<mvc:View
+	controllerName="com.rreyes.prueba_rreyes.controller.Object"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title
+				class="sapUiSmallMargin"
+				text="{objmodel>/name}"
+				level="H1"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<HBox width="100%">
+			<ToolbarSpacer width="100%"/>	
+			
+			</HBox>
+			<form:Form editable="true">
+				<form:layout>
+					<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1"
+						emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="{= ${objmodel>/typeapi} === 'character' ? 2 : 1}" 
+						columnsL="{= ${objmodel>/typeapi} === 'character' ? 2 : 1}" columnsM="{= ${objmodel>/typeapi} === 'character' ? 2 : 1}" singleContainerFullSize="false"/>
+				</form:layout>
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Created">
+								<form:fields>
+									<Input textAlign="Center" value="{path: 'objmodel>/created', type: 'sap.ui.model.type.DateTime', formatOptions: {UTC: true, pattern: 'MMMM d, yyyy'}}" editable="false" />
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'character' ? true : false}" label="Species">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/species}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'character' ? true : false}" label="Status">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/status}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'character' ? true : false}" label="Gender">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/gender}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'character' ? true : false}" label="Location">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/location/name}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'character' ? true : false}" label="Origin">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/origin/name}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'location' ? true : false}" label="Dimension">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/dimension}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'location' ? true : false}" label="Type">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/type}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'episode' ? true : false}" label="Air date">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/air_date}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="{= ${objmodel>/typeapi} === 'episode' ? true : false}" label="Episode">
+								<form:fields>
+									<Input textAlign="Center" value="{objmodel>/episode}" editable="false"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+					<form:FormContainer visible="{= ${objmodel>/typeapi} === 'character' ? true : false}">
+						<form:formElements>
+							<form:FormElement label="">
+								<form:fields>
+									<Image tooltip="{objmodel>/name}" src="{objmodel>/image}" width="12rem" />
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+				</form:formContainers>
+			</form:Form>
+		</semantic:content>
+
+		<semantic:sendEmailAction/>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>
